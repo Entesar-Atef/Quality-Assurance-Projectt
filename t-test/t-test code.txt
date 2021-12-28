@@ -1,0 +1,43 @@
+setwd("E:/رابعة ترم اول/quality assurance/project/project2")
+
+datast <- read.table("txtDataSet.txt",header=TRUE,sep = ",")
+attach(datast)
+malignant <- subset(datast, datast$diagnosis == 1)
+benign <-  subset(datast, datast$diagnosis == 0)
+##************************************************
+
+#single t-test on texture mean and texture worst for women with no breast cancer 
+texture_mean <- benign$texture_mean
+t.test(texture_mean,NULL,mu=15)
+
+texture_worst <- benign$texture_worst   
+t.test(texture_worst,NULL,mu=20)
+
+#paired t-test on texture mean and texture worst for  women with no breast cancer 
+t.test(texture_mean,texture_worst,var.equal = TRUE)
+
+#un-paired t-test radius_mean for  women with no breast cancer
+
+radius_mean_no_breast <- benign$radius_mean
+radius_mean_breast <- malignant$radius_mean
+t.test(radius_mean_no_breast,radius_mean_breast)
+
+#(paired t-test)mean and worst smoothing for sick people (20 women)
+smoothness_mean_breast <- malignant$smoothness_mean
+smoothness_worst_breast <- malignant$smoothness_worst
+t.test(smoothness_mean_breast,smoothness_worst_breast)
+
+#single t-test on mean_smoothing_health
+smoothness_mean_no_breast <-benign$smoothness_mean
+t.test(smoothness_mean_no_breast,NULL);
+
+#(un paired t-test) worst_area for sick and health people
+area_worst_breast <- malignant$area_worst
+area_worst_no_breast <-benign$area_worst
+t.test(area_worst_breast,area_worst_no_breast)
+
+
+
+
+
+

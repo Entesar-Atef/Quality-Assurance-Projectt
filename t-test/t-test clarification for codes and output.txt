@@ -1,0 +1,163 @@
+if p-value is less than 0.05
+we can reject the NULL hypothesis (H0)/(H null)
+
+if(alternative hypothesis is true then real mean
+doesn't equal thertical mean 
+
+
+##******************************
+#single t-test on texture mean for women with no breast cancer 
+texture_mean <- benign$texture_mean
+t.test(texture_mean,NULL,mu=15)
+
+->result is:- 
+One Sample t-test
+
+data:  texture_mean
+t = 13.785, df = 356, p-value < 2.2e-16
+alternative hypothesis: true mean is not equal to 15
+95 percent confidence interval:
+ 17.49892 18.33060
+sample estimates:
+mean of x 
+ 17.91476 
+##*******************************************
+#single t-test on texture worst for women with no breast cancer 
+texture_worst <- benign$texture_worst   
+t.test(texture_worst,NULL,mu=20)
+
+result is:-
+One Sample t-test
+
+data:  texture_worst
+t = 12.089, df = 356, p-value < 2.2e-16
+alternative hypothesis: true mean is not equal to 20
+95 percent confidence interval:
+ 22.94323 24.08691
+sample estimates:
+mean of x 
+ 23.51507 
+##*******************************************
+#paired t-test on texture mean and texture worst for  women with no breast cancer 
+t.test(texture_mean,texture_worst,var.equal = TRUE)
+
+result is:-
+Two Sample t-test
+
+data:  texture_mean and texture_worst
+t = -15.577, df = 712, p-value < 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -6.306159 -4.894457
+sample estimates:
+mean of x mean of y 
+ 17.91476  23.51507
+
+##*******************************************
+#un-paired t-test radius_mean for  women with no breast cancer
+
+radius_mean_no_breast <- benign$radius_mean
+radius_mean_breast <- malignant$radius_mean
+t.test(radius_mean_no_breast,radius_mean_breast)
+
+result is:-
+Welch Two Sample t-test
+
+data:  radius_mean_no_breast and radius_mean_breast
+t = -22.209, df = 289.71, p-value < 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -5.787448 -4.845165
+sample estimates:
+mean of x mean of y 
+ 12.14652  17.46283 
+##*******************************************
+#(paired t-test)mean and worst smoothing for sick people (20 women)
+smoothness_mean_breast <- malignant$smoothness_mean
+smoothness_worst_breast <- malignant$smoothness_worst
+t.test(smoothness_mean_breast,smoothness_worst_breast)
+
+result is:-
+	Welch Two Sample t-test
+
+data:  smoothness_mean_breast and smoothness_worst_breast
+t = -24.194, df = 337.31, p-value < 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.04535709 -0.03853640
+sample estimates:
+mean of x mean of y 
+0.1028985 0.1448452 
+
+##*******************************************
+#single t-test on mean_smoothing_health
+smoothness_mean_no_breast <-benign$smoothness_mean
+t.test(smoothness_mean_no_breast,NULL);
+
+result is:-
+    One Sample t-test
+
+data:  smoothness_mean_no_breast
+t = 129.95, df = 356, p-value < 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 0.0910781 0.0938772
+sample estimates:
+ mean of x 
+0.09247765 
+
+##*******************************************
+#(un paired t-test) worst_area for sick and health people
+area_worst_breast <- malignant$area_worst
+area_worst_no_breast <-benign$area_worst
+t.test(area_worst_breast,area_worst_no_breast)
+
+result is:-
+  Welch Two Sample t-test
+
+data:  area_worst_breast and area_worst_no_breast
+t = 20.571, df = 229.91, p-value < 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 780.6890 946.0847
+sample estimates:
+mean of x mean of y 
+1422.2863  558.8994 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

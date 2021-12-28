@@ -1,0 +1,79 @@
+setwd("E:/رابعة ترم اول/quality assurance/project/project2")
+
+datast <- read.table("txtDataSet.txt",header=TRUE,sep = ",")
+attach(datast)
+malignant <- subset(datast, datast$diagnosis == 1)
+benign <-  subset(datast, datast$diagnosis == 0)
+##************************************************
+
+# Create data for the pie chart 
+x <- c(212,357) 
+labels <- c("malignant","benign") 
+
+piepercent<- round(100*x/sum(x), 1) 
+
+# Give the chart file a name. 
+png(file = "diagnosis.jpg") 
+
+# Plot the chart. 
+pie(x, labels = piepercent, main = "(I)diagnosis pie chart",col = rainbow(length(x))) 
+legend("topright",  c("malignant","benign"), cex = 0.8, fill = rainbow(length(x))) 
+# Save the file. 
+dev.off()
+
+##************************************************
+
+# Create the data for the BAR chart for women with breast cancer
+texture_mean <- malignant$texture_mean
+area_mean <- malignant$area_mean
+
+# Give the chart file a name
+png(file = "barchart_textureMean_areaMean.jpg")
+
+# Plot the bar chart 
+barplot(texture_mean,names.arg=area_mean,xlab="area_mean",ylab="texture_mean",col="blue",
+        main="(II)texture_mean and area_mean chart", border="red")
+
+# Save the file
+dev.off()  
+##********************************************************
+#symmetry_mean for women with no breast cancer
+
+# Give the chart file a name.
+png(file = "boxplot_symmetry_mean.png")
+
+# Plot the chart.
+boxplot(symmetry_mean , data = benign, xlab = "symmetry mean", 
+        main = " ((III)symmetry_mean for women with no breast cancer")
+# Save the file.
+dev.off()
+
+##*************************************************
+# Create data for histogram for women with breast cancer
+perimeterSE <- malignant$perimeter_se
+# Give the chart file a name.
+png(file = "histogram_perimeter_se.png")
+
+# Create the histogram.
+hist(perimeterSE,xlab = "perimeter se for women with breast cancer",col = "blue",border = "red"
+     , xlim = c(0,20), ylim = c(0,100),breaks=2)
+
+# Save the file.
+dev.off()
+##***************************************************table 
+"  (I)textureMean and areaMean table  " 
+tab <- matrix(c(head(malignant$texture_mean,15), head(malignant$area_mean,15)),nrow=15,byrow = FALSE)
+colnames(tab) <- c("texture_mean","   area_mean")
+tab <- as.table(tab)
+tab
+
+
+
+
+
+
+
+
+
+
+
